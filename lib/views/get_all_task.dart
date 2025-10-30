@@ -4,6 +4,7 @@ import 'package:flutter_b18_backend/services/task.dart';
 import 'package:flutter_b18_backend/views/create_task.dart';
 import 'package:flutter_b18_backend/views/get_completed_task.dart';
 import 'package:flutter_b18_backend/views/get_in_completed_task.dart';
+import 'package:flutter_b18_backend/views/update_task.dart';
 import 'package:provider/provider.dart';
 
 class GetAllTaskView extends StatelessWidget {
@@ -96,6 +97,17 @@ class GetAllTaskView extends StatelessWidget {
                         }
                       },
                       icon: Icon(Icons.delete, color: Colors.red),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UpdateTask(
+                            model: taskList[i],
+                          )),
+                        );
+                      },
+                      icon: Icon(Icons.edit, color: Colors.blue),
                     ),
                   ],
                 ),
