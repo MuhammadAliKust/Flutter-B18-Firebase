@@ -6,8 +6,6 @@ import 'dart:convert';
 
 PriorityModel priorityModelFromJson(String str) => PriorityModel.fromJson(json.decode(str));
 
-String priorityModelToJson(PriorityModel data) => json.encode(data.toJson());
-
 class PriorityModel {
   final String? docId;
   final String? name;
@@ -25,8 +23,8 @@ class PriorityModel {
     createdAt: json["createdAt"],
   );
 
-  Map<String, dynamic> toJson() => {
-    "docID": docId,
+  Map<String, dynamic> toJson(String priorityID) => {
+    "docID": priorityID,
     "name": name,
     "createdAt": createdAt,
   };
