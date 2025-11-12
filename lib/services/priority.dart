@@ -28,6 +28,15 @@ class PriorityServices {
         );
   }
 
+  ///Get Priorites
+  Future<List<PriorityModel>> getPriorites(){
+    return FirebaseFirestore.instance
+        .collection('priorityCollection')
+        .get()
+        .then((list)=>list.docs
+        .map((json)=> PriorityModel.fromJson(json.data())).toList(),
+    );
+  }
   ///Delete Priority
   Future deletePriority(PriorityModel model) async {
     return await FirebaseFirestore.instance
