@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_b18_backend/models/task.dart';
 import 'package:flutter_b18_backend/services/task.dart';
 import 'package:flutter_b18_backend/views/create_task.dart';
+import 'package:flutter_b18_backend/views/favorite_task.dart';
 import 'package:flutter_b18_backend/views/get_completed_task.dart';
 import 'package:flutter_b18_backend/views/get_in_completed_task.dart';
 import 'package:flutter_b18_backend/views/get_priority.dart';
@@ -40,6 +41,16 @@ class GetAllTaskView extends StatelessWidget {
             },
             icon: Icon(Icons.circle),
           ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GetFavoriteTask()),
+              );
+            },
+            icon: Icon(Icons.favorite),
+          ),
+
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -113,6 +124,21 @@ class GetAllTaskView extends StatelessWidget {
                       },
                       icon: Icon(Icons.edit, color: Colors.blue),
                     ),
+                    IconButton(onPressed: ()async{
+                      if(taskList[i].favorite!.contains("1")){
+                        await TaskServices()
+                            .removefromFavorite(
+                            userID: "1",
+                            taskID: taskList[i].docId.toString());
+                      }
+                      else{
+                        await TaskServices().addtoFavorite(
+                            userID: "1",
+                            taskID: taskList[i].docId.toString());
+                      }
+                    },
+                        icon: Icon(taskList[i].favorite!.contains("1")
+                        ? Icons.favorite : Icons.favorite_border))
                   ],
                 ),
               );
