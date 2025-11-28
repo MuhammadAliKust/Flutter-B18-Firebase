@@ -3,6 +3,8 @@ import 'package:flutter_b18_backend/models/user.dart';
 import 'package:flutter_b18_backend/services/auuth.dart';
 import 'package:flutter_b18_backend/services/user.dart';
 import 'package:flutter_b18_backend/views/get_all_task.dart';
+import 'package:flutter_b18_backend/views/registration.dart';
+import 'package:flutter_b18_backend/views/reset_password.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -52,7 +54,13 @@ class _LoginState extends State<Login> {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(e.toString())));
           }
-        }, child: Text("Login"))
+        }, child: Text("Login")),
+        TextButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Registration()));
+        }, child: Text("Register")),
+        TextButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPassword()));
+        }, child: Text("Forgot Password")),
       ],),
     );
   }
