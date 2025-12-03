@@ -21,13 +21,14 @@ class _CreateTaskViewState extends State<CreateTaskView> {
   bool isLoading = false;
 
   @override
-  void initState(){
-    PriorityServices().getPriorites().then((val){
+  void initState() {
+    PriorityServices().getPriorites().then((val) {
       priorityList = val;
       setState(() {});
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,17 +39,16 @@ class _CreateTaskViewState extends State<CreateTaskView> {
           TextField(controller: descriptionController),
           DropdownButton(
             hint: Text("Select Priority"),
-              value: _selectedPriority,
-              items: priorityList.map((e){
-                return DropdownMenuItem(
-                    value: e,
-                    child: Text(e.name.toString()));
-              }).toList(),
+            value: _selectedPriority,
+            items: priorityList.map((e) {
+              return DropdownMenuItem(value: e, child: Text(e.name.toString()));
+            }).toList(),
             onChanged: (value) {
               setState(() {
-                _selectedPriority =value;
+                _selectedPriority = value;
               });
-            }, ),
+            },
+          ),
           SizedBox(height: 20),
           isLoading
               ? Center(child: CircularProgressIndicator())
@@ -75,6 +75,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                               title: titleController.text,
                               description: descriptionController.text,
                               isCompleted: false,
+                              priorityID: _selectedPriority!.docId,
                               createdAt: DateTime.now().millisecondsSinceEpoch,
                             ),
                           )

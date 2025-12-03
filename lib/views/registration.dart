@@ -38,6 +38,7 @@ class _RegistrationState extends State<Registration> {
                 email: emailController.text,
                 password: passwordController.text)
                 .then((user){
+
                   UserServices().createUser(UserModel(
                     name: nameController.text.toString(),
                     email: emailController.text.toString(),

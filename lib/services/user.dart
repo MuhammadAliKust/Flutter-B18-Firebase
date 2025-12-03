@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_b18_backend/models/User.dart';
+import 'package:flutter_b18_backend/models/user.dart';
 
-import '../models/user.dart';
 
 class UserServices {
   ///Create User
@@ -31,13 +30,14 @@ class UserServices {
   }
 
   ///Get Priorites
-  Future<List<UserModel>> getUserByID(){
-    return FirebaseFirestore.instance
-        .collection('UserCollection')
+  Future<UserModel> getUserByID(String userID) async {
+    return await FirebaseFirestore.instance
+        .collection('userCollection')
+        .doc(userID)
         .get()
-        .then((list)=>list.docs
-        .map((json)=> UserModel.fromJson(json.data())).toList(),
-    );
+        .then((val) {
+        return UserModel.fromJson(val.data()!);
+    });
   }
   ///Delete User
   Future deleteUser(UserModel model) async {
